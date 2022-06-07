@@ -8,6 +8,10 @@ services:
       - 2717:27017
     volumes:
       - mongo_db:/data/db
+    expose:
+     - 2717
+    networks:
+      - local
 
   api:
     build: .
@@ -20,6 +24,12 @@ services:
       JWT_SECRET: thisismynewcourse
     depends_on:
       - mongo_db
+    networks:
+      - local
 
 volumes:
   mongo_db: {}
+
+networks:
+  local:
+    driver: bridge
